@@ -15,3 +15,6 @@ url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={lo
 response = requests.get(url).json()
 
 df = pd.DataFrame(response['daily'])
+
+df['temperature_avg'] = (df['temperature_2m_max'] + df['temperature_2m_min']) / 2
+df['precipitation_cumsum'] = df['precipitation_sum'].cumsum()
