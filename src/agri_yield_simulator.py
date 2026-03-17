@@ -18,3 +18,8 @@ df = pd.DataFrame(response['daily'])
 
 df['temperature_avg'] = (df['temperature_2m_max'] + df['temperature_2m_min']) / 2
 df['precipitation_cumsum'] = df['precipitation_sum'].cumsum()
+
+ideal_temp = 25
+ideal_precip = 100
+
+df['yield_sim'] = ((1 - abs(df['temperature_avg'] - ideal_temp)/10) * (df['precipitation_cumsum']/ideal_precip)).clip(0, 1)
