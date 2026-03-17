@@ -26,3 +26,18 @@ df['yield_sim'] = ((1 - abs(df['temperature_avg'] - ideal_temp)/10) * (df['preci
 
 df['temperature_norm'] = df['temperature_avg']/50
 df['precipitation_norm'] = df['precipitation_cumsum']/200
+
+sns.set(style="whitegrid")
+plt.figure(figsize=(14,7))
+
+sns.lineplot(x='time', y='yield_sim', data=df, label='Produtividade Simulada', color='green', linewidth=2.5)
+sns.lineplot(x='time', y='temperature_norm', data=df, label='Temperatura Média (normalizada)', color='orange', linestyle='--', linewidth=2)
+sns.lineplot(x='time', y='precipitation_norm', data=df, label='Precipitação Acumulada (normalizada)', color='blue', linestyle=':', linewidth=2)
+
+plt.xlabel('Data', fontsize=12)
+plt.ylabel('Valor Normalizado / Produtividade', fontsize=12)
+plt.title('Produtividade Agrícola Simulada - Nova York, NY', fontsize=16)
+plt.xticks(rotation=45)
+plt.legend(fontsize=12)
+plt.tight_layout()
+plt.show()
