@@ -41,3 +41,20 @@ plt.xticks(rotation=45)
 plt.legend(fontsize=12)
 plt.tight_layout()
 plt.show()
+
+ideal_temp = 25
+ideal_precip = 10
+
+df['yield_sim'] = ((1 - abs(df['temperature_avg'] - ideal_temp)/10) * (df['precipitation_sum']/ideal_precip)).clip(0, 1)
+
+def classify_yield(y):
+    if y > 0.8:
+        return "Colher/Plantar ideal"
+    elif y < 0.3:
+        return "Evitar"
+    else:
+        return "Período médio"
+
+df['recommendation'] = df['yield_sim'].apply(classify_yield)
+
+df[['time','temperature_avg','precipitation_sum','yield_sim','recommendation']].tail(10)
