@@ -58,3 +58,15 @@ def classify_yield(y):
 df['recommendation'] = df['yield_sim'].apply(classify_yield)
 
 df[['time','temperature_avg','precipitation_sum','yield_sim','recommendation']].tail(10)
+
+np.random.seed(42)
+
+dates = pd.date_range(start="2026-03-08", periods=14)
+temperature_avg = np.random.normal(loc=20, scale=5, size=14)
+precipitation_sum = np.random.uniform(low=0, high=10, size=14)
+
+df = pd.DataFrame({
+    'time': dates,
+    'temperature_avg': temperature_avg,
+    'precipitation_sum': precipitation_sum
+})
