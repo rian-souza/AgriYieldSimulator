@@ -71,6 +71,33 @@ df = pd.DataFrame({
     'precipitation_sum': precipitation_sum
 })
 
+def classify_yield(y):
+    if y > 0.8:
+        return "Colher/Plantar ideal (Simulado)"
+    elif y < 0.3:
+        return "Evitar (Simulado)"
+    else:
+        return "Período médio (Simulado)"
+
+df['recommendation'] = df['yield_sim'].apply(classify_yield)
+
+palette = {'Colher/Plantar ideal (Simulado)':'green', 'Período médio (Simulado)':'orange', 'Evitar (Simulado)':'red'}
+
+sns.set(style="whitegrid")
+plt.figure(figsize=(14,7))
+sns.lineplot(x='time', y='yield_sim', data=df, color='gray', linewidth=1.5, alpha=0.5)
+sns.scatterplot(x='time', y='yield_sim', data=df, hue='recommendation', palette=palette, s=100)
+
+plt.xlabel('Data', fontsize=12)
+plt.ylabel('Produtividade Simulada', fontsize=12)
+plt.title('Produtividade Agrícola Simulada com Recomendações (Dados Simulados) - Nova York, NY', fontsize=16)
+plt.xticks(rotation=45)
+plt.legend(title='Recomendação', fontsize=12)
+plt.tight_layout()
+plt.show()
+
+df[['time','temperature_avg','precipitation_sum','yield_sim','recommendation']]
+
 ideal_temp = 25
 ideal_precip = 5
 
