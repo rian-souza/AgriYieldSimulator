@@ -70,3 +70,8 @@ df = pd.DataFrame({
     'temperature_avg': temperature_avg,
     'precipitation_sum': precipitation_sum
 })
+
+ideal_temp = 25
+ideal_precip = 5
+
+df['yield_sim'] = ((1 - abs(df['temperature_avg'] - ideal_temp)/10) * (df['precipitation_sum']/ideal_precip)).clip(0, 1)
