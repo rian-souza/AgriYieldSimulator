@@ -6,9 +6,7 @@ Este projeto utiliza dados de temperatura e precipitação para simular produtiv
 
 ## Status do Projeto
 
-🚧 Projeto em desenvolvimento.
-
-A estrutura inicial do repositório foi criada e o código principal está sendo implementado gradualmente.
+✅ Projeto finalizado.
 
 ## Tecnologias Utilizadas
 
